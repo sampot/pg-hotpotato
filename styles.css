@@ -1,10 +1,28 @@
-:root{--bg:#1c1208;--fg:#fff7ed;--accent:#fb923c;--muted:color-mix(in oklab,var(--fg) 55%,transparent)}
-*{box-sizing:border-box}html,body{margin:0;padding:0}body{min-height:100vh;background:radial-gradient(ellipse at top,color-mix(in oklab,var(--accent) 18%,var(--bg)),var(--bg));color:var(--fg);font-family:system-ui,"PingFang TC","Microsoft JhengHei",sans-serif}
-main{max-width:40rem;margin:0 auto;padding:1rem .85rem 2rem}
-h1{margin:0;font-size:1.5rem}.tag{margin:.25rem 0 0;color:var(--muted);font-size:.9rem}
-.toolbar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:1rem 0}
-button,.btn{min-height:44px;padding:.55rem 1rem;border-radius:12px;border:1px solid color-mix(in oklab,var(--fg) 20%,transparent);background:color-mix(in oklab,var(--fg) 8%,var(--bg));color:var(--fg);font:inherit;cursor:pointer;touch-action:manipulation}
-button.primary{background:var(--accent);border-color:var(--accent);color:#111;font-weight:700}
-.status{margin:0;color:var(--muted)}.panel{background:color-mix(in oklab,var(--fg) 6%,var(--bg));border:1px solid color-mix(in oklab,var(--fg) 12%,transparent);border-radius:14px;padding:.75rem}
-.grid{display:grid;gap:.35rem}.help{margin-top:1rem;color:var(--muted);font-size:.9rem;line-height:1.5}
-@media(min-width:560px){main{padding-top:1.5rem}h1{font-size:1.85rem}}
+:root{color-scheme:dark;--bg:#1a0c08;--panel:#2b1510;--fg:#fff7ed;--muted:#d2b9a9;--line:#613528;--accent:#fb923c;--danger:#fb4b3e;--safe:#4ade80;--tap:48px}
+*{box-sizing:border-box}
+body{min-height:100dvh;margin:0;background:radial-gradient(circle at 50% -8%,#7c2d12 0,transparent 45%),var(--bg);color:var(--fg);font-family:system-ui,"PingFang TC","Microsoft JhengHei",sans-serif}
+main{width:min(100%,36rem);margin:auto;padding:1rem .85rem max(2rem,env(safe-area-inset-bottom))}
+.eyebrow{margin:0;color:var(--accent);font-size:.75rem;font-weight:800;letter-spacing:.25em}
+h1{margin:.15rem 0;font-size:clamp(1.9rem,8vw,2.7rem)}
+main>p:not(.eyebrow){margin:.35rem 0 1rem;color:var(--muted)}
+button,select{min-height:var(--tap);border:1px solid var(--line);border-radius:.85rem;background:#3a1f18;color:var(--fg);font:inherit}
+button{padding:.65rem 1rem;font-weight:800;cursor:pointer;touch-action:manipulation}
+button:disabled{opacity:.42;cursor:not-allowed}
+.setup{display:flex;flex-wrap:wrap;align-items:end;gap:.65rem;padding:.8rem;border:1px solid var(--line);border-radius:1rem;background:var(--panel)}
+.setup label{display:grid;flex:1;gap:.3rem;color:var(--muted);font-size:.85rem}
+.setup select{width:100%;padding:0 .7rem}
+#start{flex:1;background:var(--accent);border-color:var(--accent);color:#2a1007}
+.hud{display:grid;gap:.25rem;margin:1rem 0;padding:.8rem;border:1px solid var(--line);border-radius:.9rem;background:var(--panel);text-align:center}
+.hud strong{color:var(--accent);font-size:1.05rem}
+.hud span{min-height:1.4em;font-weight:700}
+.players{display:grid;gap:.6rem}
+.player{min-height:5.2rem;padding:.7rem;border:1px solid var(--line);background:var(--panel);color:var(--fg);text-align:left;transition:transform .16s,border-color .16s,opacity .16s}
+.player strong{font-size:1.08rem}
+.player.holder{border-color:var(--danger);background:linear-gradient(135deg,color-mix(in oklab,var(--danger) 28%,var(--panel)),var(--panel));box-shadow:0 0 0 3px color-mix(in oklab,var(--danger) 25%,transparent);animation:pulse .75s ease-in-out infinite alternate}
+.player.out{opacity:.4;filter:grayscale(1);text-decoration:line-through}
+.primary{width:100%;margin-top:.8rem;background:var(--accent);border-color:var(--accent);color:#2a1007}
+details{margin-top:1rem;padding:.2rem .75rem;border:1px solid var(--line);border-radius:.85rem;color:var(--muted)}
+summary{min-height:var(--tap);display:flex;align-items:center;color:var(--fg);font-weight:700;cursor:pointer}
+@keyframes pulse{to{transform:scale(1.02);box-shadow:0 0 18px color-mix(in oklab,var(--danger) 45%,transparent)}}
+@media(prefers-reduced-motion:reduce){.player.holder{animation:none}}
+@media(min-width:560px){main{padding-top:1.6rem}.players{grid-template-columns:1fr 1fr}.player{min-height:6rem}}
