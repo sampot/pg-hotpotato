@@ -1,0 +1,7 @@
+import { HotPotatoGame } from "./game.js";
+const game=new HotPotatoGame(),players=document.querySelector("#players"),status=document.querySelector("#status"),round=document.querySelector("#round"),pass=document.querySelector("#pass");
+let last=performance.now(),aiWait=0;
+function render(){players.replaceChildren(...game.players.map((p,i)=>{const el=document.createElement("button");el.className=`player ${i===game.holder&&p.alive?"holder":""} ${p.alive?"":"out"}`;el.disabled=!p.alive||i===game.holder||Boolean(game.winner);el.innerHTML=`<strong>${p.name}</strong><br>${p.alive?(i===game.holder?"💣 炸彈！":"🙌 安全"):"💥 淘汰"}`;el.onclick=()=>{game.pass(i);render()};return el}));round.textContent=`第 ${game.round} 回合`;status.textContent=game.winner!==null?`${game.players[game.winner].name} 勝出！`:game.players[game.holder]?.ai?"AI 正在傳…":"炸彈在你手上";pass.disabled=!game.players[game.holder]||game.players[game.holder].ai||game.winner!==null}
+document.querySelector("#start").onclick=()=>{game.start(["你"],Number(document.querySelector("#count").value));render()};
+pass.onclick=()=>{const alive=game.players.map((p,i)=>p.alive&&i!==game.holder?i:-1).filter(i=>i>=0);game.pass(alive[0]);render()};
+function frame(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(game.players.length&&game.winner===null){game.tick(dt);aiWait-=dt;if(game.players[game.holder]?.ai&&aiWait<=0){game.aiPass();aiWait=.7+Math.random()*.8}render()}requestAnimationFrame(frame)}requestAnimationFrame(frame);render();

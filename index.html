@@ -1,0 +1,8 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>傳炸彈</title><link rel="stylesheet" href="styles.css"></head>
+<body><main><p class="eyebrow">桌遊</p><h1>💣 傳炸彈</h1><p>倒數不給你看。快把炸彈傳出去！</p>
+<section class="panel setup"><label>玩家數 <select id="count"><option>3</option><option>4</option></select></label><button id="start">開始系列賽</button></section>
+<section class="hud"><strong id="round">第 0 回合</strong><span id="status" role="status">準備開局</span></section>
+<section id="players" class="players" aria-label="玩家"></section>
+<button id="pass" class="primary" disabled>傳給下一位</button>
+<details><summary>玩法與連線藍圖</summary><p>3–4 人輪流傳炸彈，爆炸時持有者淘汰，最後一人生還。未來 Invite 可同步 pass／boom 事件；目前只做本機與 AI。</p></details>
+</main><script type="module" src="app.js"></script></body></html>
